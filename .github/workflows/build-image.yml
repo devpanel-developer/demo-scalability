@@ -64,8 +64,8 @@ jobs:
         echo "INSTALL DRUPAL"
         docker exec ${{ job.services.webserver.id }} bash -c "cd \$APP_ROOT && bash .devpanel/init.sh"
         docker exec ${{ job.services.webserver.id }} bash -c "cd \$APP_ROOT && ls -al"
-        echo "DUMPS DATABASE + STATIC FILE" 
-        docker exec ${{ job.services.webserver.id }} bash -c "cd \$APP_ROOT && bash .devpanel/quickstart/create_quickstart.sh" 
+        # echo "DUMPS DATABASE + STATIC FILE" 
+        # docker exec ${{ job.services.webserver.id }} bash -c "cd \$APP_ROOT && bash .devpanel/quickstart/create_quickstart.sh" 
 
     - name: Log in to GitHub Container Registry
       uses: docker/login-action@v2
