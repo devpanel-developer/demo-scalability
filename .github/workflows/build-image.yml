@@ -77,17 +77,17 @@ jobs:
 
     - name: Set image tag using commit ID
       run: |
-        echo "IMAGE_TAG_COMMIT=ghcr.io/levidevpanelalpha/develop-ci-d11:$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+        echo "IMAGE_TAG_COMMIT=ghcr.io/devpanel-developer/demo-scalability:$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
     - name: Set env to pro environment
       if: endsWith(github.ref, '/main')
       run: |
-        echo "IMAGE_TAG=ghcr.io/levidevpanelalpha/develop-ci-d11:latest" >> $GITHUB_ENV
+        echo "IMAGE_TAG=ghcr.io/devpanel-developer/demo-scalability:latest" >> $GITHUB_ENV
 
     - name: Set env to develop environment
       if: endsWith(github.ref, '/develop')
       run: |
-        echo "IMAGE_TAG=ghcr.io/levidevpanelalpha/develop-ci-d11:develop" >> $GITHUB_ENV
+        echo "IMAGE_TAG=ghcr.io/devpanel-developer/demo-scalability:develop" >> $GITHUB_ENV
 
     - name: Commit and push the container state to Docker Hub
       run: |
