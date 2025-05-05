@@ -1,0 +1,6 @@
+name: 'Deployment'
+type: module
+description: 'A simple custom module to display Blue Green Deploymeny'
+core_version_requirement: ^11
+package: Custom
+dependencies: []

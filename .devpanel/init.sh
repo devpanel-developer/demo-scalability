@@ -46,6 +46,7 @@ cd $WEB_ROOT && git submodule update --init --recursive
 
 
 #== Drush Site Install
+drush en deployment -y
 if [[ $(mysql -h$DB_HOST -P$DB_PORT -u$DB_USER -p$DB_PASSWORD $DB_NAME -e "show tables;") == '' ]]; then
   echo "Site installing ..."
   cd $APP_ROOT

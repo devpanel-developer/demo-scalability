@@ -1,0 +1,7 @@
+deployment.page:
+  path: '/deployment'
+  defaults:
+    _controller: '\Drupal\deployment\Controller\DeploymentController::index'
+    _title: 'Blue Green Deployment'
+  requirements:
+    _permission: 'access content'
