@@ -65,8 +65,8 @@ jobs:
         echo "INSTALL DRUPAL"
         docker exec ${{ job.services.webserver.id }} bash -c "cd \$APP_ROOT && bash .devpanel/init.sh"
         docker exec ${{ job.services.webserver.id }} bash -c "cd \$APP_ROOT && ls -al"
-        # echo "DUMPS DATABASE + STATIC FILE" 
-        # docker exec ${{ job.services.webserver.id }} bash -c "cd \$APP_ROOT && bash .devpanel/quickstart/create_quickstart.sh" 
+        echo "DUMPS DATABASE + STATIC FILE" 
+        docker exec ${{ job.services.webserver.id }} bash -c "cd \$APP_ROOT && bash .devpanel/quickstart/create_quickstart.sh" 
 
     - name: Log in to GitHub Container Registry
       uses: docker/login-action@v2
@@ -75,19 +75,17 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Set image tag using commit ID
-      run: |
-        echo "IMAGE_TAG_COMMIT=ghcr.io/devpanel-developer/demo-scalability:$(git rev-parse --short HEAD)" >> $GITHUB_ENV
-
     - name: Set env to pro environment
       if: endsWith(github.ref, '/main')
       run: |
         echo "IMAGE_TAG=ghcr.io/devpanel-developer/demo-scalability:latest" >> $GITHUB_ENV
+        echo "IMAGE_TAG_COMMIT=ghcr.io/devpanel-developer/demo-scalability:prod-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
     - name: Set env to develop environment
       if: endsWith(github.ref, '/develop')
       run: |
         echo "IMAGE_TAG=ghcr.io/devpanel-developer/demo-scalability:develop" >> $GITHUB_ENV
+        echo "IMAGE_TAG_COMMIT=ghcr.io/devpanel-developer/demo-scalability:dev-$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
     - name: Commit and push the container state to Docker Hub
       run: |
