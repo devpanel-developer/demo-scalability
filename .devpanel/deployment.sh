@@ -33,7 +33,6 @@ fi
 
 #== Update permission
 echo 'Update permission ....'
-drush en hello_world -y
 drush en deployment -y
 drush cr
 sudo chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP $STATIC_FILES_PATH
